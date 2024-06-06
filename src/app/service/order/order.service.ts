@@ -72,4 +72,14 @@ export class OrderService {
       })
     );
   }
+
+  getOrderReport(): Observable<any> {
+    return this.http.get<{ code: string; message: string; result: any[] }>(`${this.apiUrl}/download`).pipe(
+      catchError(error => {
+        // Handle error, log it, or display a user-friendly message
+        console.error('Error fetching order report:', error);
+        return throwError(error);
+      })
+    );
+  }
 }

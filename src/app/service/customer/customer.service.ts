@@ -59,4 +59,8 @@ export class CustomerService {
       })
     );
   }
+
+  getCustomerImage(bucketName: string, objectName: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/get-object?bucketName=${bucketName}&objectName=${objectName}`, { responseType: 'blob' });
+  }
 }

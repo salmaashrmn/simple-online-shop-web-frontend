@@ -40,6 +40,17 @@ export class OrderComponent implements OnInit{
     });
   }
 
+  downloadReport() {
+    this.orderService.getOrderReport().subscribe(
+      response => {
+      console.log('Order report successfully generated:', response.message);
+      window.location.reload();
+    },
+    error => {
+      console.error('Error delete order:', error);
+    });
+  }
+
   goToAddForm() {
     this.router.navigate(['order/add']);
   }

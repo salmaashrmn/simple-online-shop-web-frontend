@@ -14,6 +14,7 @@ import { CustomerService } from '../../../service/customer/customer.service';
 export class CustomerdetailComponent implements OnInit {
   customerId!: number;
   customer!: any;
+  customerImageUrl: string = '';
 
   constructor(private route: ActivatedRoute, private router: Router, private customerService: CustomerService) { }
 
@@ -30,6 +31,9 @@ export class CustomerdetailComponent implements OnInit {
           const datePipe = new DatePipe('en-US');
           this.customer.lastOrderDate = datePipe.transform(dateTime, 'yyyy-MM-dd HH:mm:ss');
         }
+        if (this.customer.pic) {
+          this.customerImageUrl = `http://localhost:8081/api/simple-olshop-service/customer/get-object?bucketName=online-shop&objectName=${this.customer.pic}`
+        }
       });
     } else {
       console.error("ID parameter is null");
@@ -40,4 +44,5 @@ export class CustomerdetailComponent implements OnInit {
     console.log('Detail button clicked with ID:', id);
     this.router.navigate(['customer/edit', id]);
   }
+  
 }
